@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Text Auto - Long Payload Repeater V1.0.4",
+  "version": "1.0.4",
+  "description": "Gửi văn bản dài tự động trên tab ChatGPT hiện tại; tương thích DOM ChatGPT mới 2026-09; sửa background-tab recovery, Stop detector theo composer và response detector theo user→assistant DOM order.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "tabs",
+    "storage",
+    "downloads",
+    "sidePanel",
+    "scripting",
+    "debugger"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "ChatGPT Text Auto"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

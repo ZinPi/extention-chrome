@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ChatGPT Text Auto</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <h1>ChatGPT Text Auto</h1>
+    <div class="sub">Long Payload Repeater • V1.0.4</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Văn bản ban đầu</h2>
+      <label class="check"><input id="sendInitial" type="checkbox" checked> Gửi văn bản ban đầu trước khi bắt đầu lặp</label>
+      <div class="fileRow"><input id="initialFile" type="file" accept=".txt,text/plain"><span id="initialChars" class="counter">0 ký tự</span></div>
+      <textarea id="initialText" rows="11" spellcheck="false" placeholder="Dán toàn bộ yêu cầu ban đầu vào đây..."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>2. Văn bản dài gửi lặp</h2>
+      <p class="muted">Mỗi lượt gửi nguyên payload này. Không tự chia nhỏ, không tự rút gọn.</p>
+      <div class="fileRow"><input id="repeatFile" type="file" accept=".txt,text/plain"><span id="repeatChars" class="counter">0 ký tự</span></div>
+      <textarea id="repeatText" rows="11" spellcheck="false" placeholder="Có thể là 'tiếp tục' hoặc một prompt dài hàng nghìn ký tự, nhiều dòng..."></textarea>
+      <label>Số lần gửi payload lặp
+        <input id="repeatCount" type="number" min="0" max="9999" value="15">
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>3. Điều khiển</h2>
+      <div class="grid2">
+        <label>Ổn định response trước khi coi là xong (giây)
+          <input id="stableSec" type="number" min="2" max="60" step="0.5" value="5">
+        </label>
+        <label>Delay trước lượt kế (giây)
+          <input id="nextDelaySec" type="number" min="0" max="60" step="0.5" value="1">
+        </label>
+        <label>Timeout một lượt (phút)
+          <input id="responseTimeoutMin" type="number" min="1" max="360" value="30">
+        </label>
+        <label>Tên project
+          <input id="projectName" value="PROJECT_001">
+        </label>
+      </div>
+      <label class="check"><input id="saveEachResponse" type="checkbox" checked> Lưu từng response thành PART_XXX.txt + FINAL_COMBINED.txt</label>
+      <label class="check"><input id="cdpFallback" type="checkbox" checked> Dùng Chrome Debugger làm fallback khi UI mới không nhận thao tác dán/Enter</label>
+      <div class="notice">Tool chỉ chạy trên <b>tab ChatGPT đang mở khi bấm CHẠY</b>. Mỗi lượt: dán đủ payload → xác minh → gửi → xác minh Send/composer → chờ assistant hoàn tất → mới gửi lượt tiếp.</div>
+      <div class="actions">
+        <button id="probeBtn">KIỂM TRA UI</button>
+        <button id="startBtn" class="primary">▶ CHẠY</button>
+        <button id="resumeBtn">TIẾP TỤC SAU LỖI</button>
+        <button id="stopBtn" class="danger">■ DỪNG</button>
+      </div>
+      <div id="statusLine" class="status">Sẵn sàng.</div>
+    </section>
+
+    <section class="card">
+      <h2>Tiến độ</h2>
+      <div id="progress">Chưa chạy.</div>
+    </section>
+
+    <details class="card">
+      <summary>Cài đặt selector dự phòng</summary>
+      <p class="muted">Chỉ cần dùng nếu ChatGPT đổi DOM lần nữa. Để trống = tự dò nhiều selector.</p>
+      <label>Composer selector <input id="composerSelector" placeholder=".ProseMirror[data-composer-markdown]"></label>
+      <label>Send button selector <input id="sendSelector" placeholder="button[type='submit'][aria-label='Gửi']"></label>
+    </details>
+
+    <details class="card">
+      <summary>Log gần nhất</summary>
+      <pre id="logBox"></pre>
+    </details>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

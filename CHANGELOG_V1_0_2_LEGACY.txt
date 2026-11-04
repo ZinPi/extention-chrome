@@ -1,0 +1,19 @@
+ChatGPT Text Auto V1.0.2
+
+FIX CHÍNH
+- Tương thích DOM ChatGPT hiện tại (2026-09-25) dựa trên snapshot thật.
+- Assistant: [data-chatgpt-search-unit-key$=":assistant"] + [data-conversation-role="assistant"] + [data-markdown-text-style="assistant-message"].
+- User: [data-chatgpt-search-unit-key$=":user"] + [data-user-message-bubble="true"].
+- Composer: .ProseMirror[data-composer-markdown][contenteditable="true"].
+- Send: button[type="submit"][aria-label="Gửi"] (và fallback English/legacy).
+- Generating: button[aria-label="Ngừng"] (và fallback English/legacy).
+- Response detector dùng key thật của turn, không chỉ dựa vào data-message-author-role cũ.
+- Baseline lưu tập assistant/user turn keys trước SEND để nhận chính xác turn mới ngay cả khi số node thay đổi do virtualization.
+- DONE chỉ được phát khi có assistant mới, nút Ngừng đã biến mất và nội dung assistant ổn định đủ thời gian cấu hình.
+- Giữ nguyên cơ chế xác minh paste exact/hash, send confirmation và fail-closed để tránh gửi trùng.
+
+CÀI ĐẶT
+1. Gỡ/tắt bản V1.0.1.
+2. Load unpacked thư mục V1.0.2 hoặc cài lại từ ZIP giải nén.
+3. BẮT BUỘC reload tab ChatGPT (Ctrl+R) sau khi reload extension.
+4. Bấm KIỂM TRA UI trước khi CHẠY.

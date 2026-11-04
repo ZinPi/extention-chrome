@@ -1,0 +1,19 @@
+ChatGPT Text Auto V1.0.3
+Date: 2026-09-25
+
+FIX: PASTE_VERIFY_FAILED trên ChatGPT ProseMirror mới khi payload nhiều dòng.
+
+- Thay composer verification từ innerText thô sang logical plaintext parser.
+- Các top-level paragraph/block được nối bằng đúng 1 LF.
+- <br> nội dòng được giữ thành LF; ProseMirror-trailingBreak không bị tính thành ký tự payload.
+- Blank paragraphs vẫn được bảo toàn thành blank lines.
+- Exact verification vẫn fail-closed: toàn bộ logical text + SHA-256 phải khớp payload.
+- Không dùng quy tắc nguy hiểm kiểu “lệch 1 ký tự thì cho qua”.
+- Failure message ghi expected/logical/raw length + hash để QA.
+- Giữ nguyên detector DOM V1.0.2 cho USER/ASSISTANT/SEND/NGỪNG.
+
+Cài đặt:
+1. Xóa/tắt bản cũ trong chrome://extensions.
+2. Giải nén V1.0.3 vào thư mục cố định.
+3. Load unpacked thư mục V1.0.3.
+4. Ctrl+R tab ChatGPT trước khi chạy.

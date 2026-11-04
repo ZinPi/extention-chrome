@@ -1,0 +1,13 @@
+ChatGPT Text Auto V1.0.4
+
+FIXES
+1. BACKGROUND TAB: pause response timeout while document.hidden.
+2. STOP DETECTOR: scope Stop/Ngừng to current composer controls only.
+3. RESPONSE DETECTOR: union current DOM representations and associate assistant after the sent user in DOM order.
+4. AUTO RECOVERY: on target-tab activation/reload and service-worker restart, recover a sent-confirmed pending turn without resending it.
+5. Keep V1.0.3 logical ProseMirror paste verification.
+
+INSTALL
+- Extract to a permanent folder.
+- Load unpacked.
+- Refresh the ChatGPT target tab once after updating.
